@@ -1,0 +1,37 @@
+.loginRegister{
+    margin-top: 13vh;
+    width: 28vw;
+    border: 1px solid rgb(224, 153, 153);
+    padding: 1.5rem 2.5rem;
+}
+
+.form-input input{
+    border: 1px solid rgb(219, 219, 219);
+    color: rgb(214, 214, 214);
+    outline: none;
+}
+
+.form-input input , .form-button{
+    width: 90%;
+    padding: .5rem .5rem;
+    margin-top: 1rem;
+}
+
+.form-button{
+    background-color: rgb(79, 79, 214);
+    color: white;
+}
+
+.loginRegister > div{
+    width: 90%;
+}
+
+.loginRegister > div, img, b, p{
+    margin: 1rem;
+}
+
+.loginRegister > div b{
+    font-size: 19px;
+}
+
+
