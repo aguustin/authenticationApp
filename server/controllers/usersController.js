@@ -57,7 +57,9 @@ export const Details = async (req, res) => {
     console.log(id);
         try{
             const userDetails = await users.find({_id: id});
+
             res.send(userDetails);
+            
         }catch(error){
             console.log(error);
         }
@@ -95,6 +97,7 @@ export const EditUser = async (req, res) => {
         })
 
             res.send(userUpdate);
+
         }catch(error){
             console.log(error);
         }

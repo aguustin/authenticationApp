@@ -19,6 +19,27 @@ const LoginRegister = () => {
         );
     };
 
+    const facebookAcount = () => {
+        window.open(
+            `http://localhost:4000/facebook/callback`,
+            "_self"
+        );
+    };
+
+    const twitterAcount = () => {
+        window.open(
+            `http://localhost:4000/twitter/callback`,
+            "_self"
+        );
+    };
+
+    const githubAcount = () => {
+        window.open(
+            `http://localhost:4000/github/callback`,
+            "_self"
+        );
+    };
+
     return(
         <div className="loginRegister mx-auto rounded-3xl">
             <div className='text-left mx-auto'>
@@ -41,11 +62,11 @@ const LoginRegister = () => {
             <div className='social'>
                 <p className='mt-6'>or continue with these social profile</p>
                     <div className='flex mx-auto justify-center mt-4'>
-                        <button onClick={googleAcount}>goo</button>
-                        <img src={google} alt=""></img>
-                        <img src={facebook} alt=""></img>
-                        <img src={twitter} alt=""></img>
-                        <img src={github} alt=""></img>
+                       
+                         <button onClick={googleAcount}><img src={google} alt=""></img></button>
+                         <button onClick={facebookAcount}></button><img src={facebook} alt=""></img>
+                         <button onClick={twitterAcount}></button><img src={twitter} alt=""></img>
+                         <button onClick={githubAcount}></button><img src={github} alt=""></img>
                     </div>
                 {changeForm ? <p className='mt-4'>already a member? <button onClick={() => setChangeForm(!changeForm)}>Login</button></p> :
                 <p className='mt-4'>Dont have account yet? <button onClick={() => setChangeForm(!changeForm)}>Register</button></p> }

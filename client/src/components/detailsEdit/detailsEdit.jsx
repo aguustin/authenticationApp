@@ -1,11 +1,19 @@
 import './detailsEdit.css';
 import google from '../../img/Google.svg';
-import { useState } from 'react';
-
+import { useContext, useEffect, useState } from 'react';
+import DetailsBody from '../detailsBody/detailsBody';
+import UserContext from '../../userContext/userContex';
 
 const DetailsEdit = () => {
 
     const [edition, setEdition] = useState(false);
+    const {getUserDetails, registerContext, userDetail} = useContext(UserContext);
+    
+    useEffect(() => {
+      (async() => {
+        await getUserDetails();
+      })()
+    }, [])
 
     const Details = () => {
         return(
@@ -20,32 +28,10 @@ const DetailsEdit = () => {
            </div>
                 <button className='rounded-3xl' onClick={() => setEdition(!edition)}>Edit</button>
             </thead>
-            <tbody>
-              <tr>
-                <td>Photo</td>
-                <td><img src={google} alt=""></img></td>
-              </tr>
-              <tr>
-                <td>Name</td>
-                <td>The Eagles</td>
-              </tr>
-              <tr>
-                <td>Bio</td>
-                <td>Earth, Wind, and Fire</td>
-              </tr>
-              <tr>
-                <td>Phone</td>
-                <td>Malcolm Lockyer</td>
-              </tr>
-              <tr>
-                <td>Email</td>
-                <td>The Eagles</td>
-              </tr>
-              <tr>
-                <td>Password</td>
-                <td>Earth, Wind, and Fire</td>
-              </tr>
-            </tbody>
+            {userDetail.map(user =>
+              <DetailsBody user={user} key={user._id} />
+            )}
+              
           </table>
             </div>
             
@@ -53,41 +39,62 @@ const DetailsEdit = () => {
     }
 
     const Edit = () => {
+
+      const registerUser = async (e) => {
+        e.preventDefault();
+        const name = e.target.elements.name.value;
+        const bio = e.target.elements.bio.value;
+        const phone = e.target.elements.phone .value;
+        const email = e.target.elements.email.value;
+        const password = e.target.elements.password.value;
+
+        const userEdit = {
+            name: name,
+            bio: bio,
+            phone: phone,
+            email: email,
+            password: password
+        }
+
+        await registerContext(userEdit);
+      }
+
         return(
             <div>
-            <button>  Back</button>
+            <button> Back</button>
             <div className='edit mx-auto rounded-3xl'>
            
             <div>
                 <h2>Change Info</h2>
                 <p>Changes will be reflected to every service</p>
-                <form>
+
+                <form onSubmit={(e) => registerUser(e)}>
                     <div>
                         <img src="" alt=""></img>
                         <button>change photo</button>
                     </div>
                     <div className='mt-6'>
                         <label for="name">name</label><br></br>
-                        <input className='form-input' type="text" placeholder="enter your name..."></input>
+                        <input className='form-input' type="text" name="name" placeholder="enter your name..."></input>
                     </div>
                     <div>
                         <label for="bio">bio</label><br></br>
-                        <textarea className='form-input' type="text" placeholder="enter your bio..."></textarea>
+                        <textarea className='form-input' type="text" name="bio" placeholder="enter your bio..."></textarea>
                     </div>
                     <div>
                         <label for="phone">phone</label><br></br>
-                        <input className='form-input' type="text" placeholder="enter your phone..."></input>
+                        <input className='form-input' type="text" name="phone" placeholder="enter your phone..."></input>
                     </div>
                     <div>
                         <label for="email">email</label><br></br>
-                        <input className='form-input' type="text" placeholder="enter your email..."></input>
+                        <input className='form-input' type="text" name="email" placeholder="enter your email..."></input>
                     </div>
                     <div>
                         <label for="password">password</label><br></br>
-                        <input className='form-input' type="password" placeholder="enter your new password..."></input>
+                        <input className='form-input' type="password" name="password" placeholder="enter your new password..."></input>
                     </div>
 
-                    <button id="save">Save</button>
+                    <button type="submit" id="save">Save</button>
                 </form>
             </div>
                 
@@ -99,7 +106,7 @@ const DetailsEdit = () => {
 
     return(
         <div>
-            {edition ? <Edit/> : <Details/>}
+            {edition ? <Details/> : <Edit/>}
         </div>
     )
 
