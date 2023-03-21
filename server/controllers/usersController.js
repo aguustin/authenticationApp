@@ -25,28 +25,41 @@ export const LoginUser = async (req, res) => {
 
 export const RegisterUser = async (req, res) => {
     
-    const photo = req.body.photo;
+    //const photo = req.body.photo;
     const name = req.body.name;
     const bio = req.body.bio;
     const phone = req.body.phone;
     const email = req.body.email;
     const password = req.body.password;
+    console.log(email);
 
-    const salt = bcrypt.genSaltSync(10);
-    const hash = await bcrypt.hash(password, salt);
-    
-    const newUser = await new users({
-        photo: photo,
-        name: name,
-        bio: bio,
-        phone: phone,
-        email: email,
-        password:hash
-    })
-    
-    newUser.save();
+    const userExist = await users.find({email:email});
 
-    res.send(newUser);
+    if(userExist.length !== 0){
+
+        console.log("usuario ya existe");
+
+        res.sendStatus(500);
+
+    }else{
+
+        const salt = bcrypt.genSaltSync(10);
+
+        const hash = await bcrypt.hash(password, salt);
+        
+        const newUser = await new users({
+            //photo: photo,
+            name: name,
+            bio: bio,
+            phone: phone,
+            email: email,
+            password:hash
+        })
+        
+        newUser.save();
+    
+        res.send(newUser);
+    }
 
 }
 
@@ -85,7 +98,7 @@ export const EditUser = async (req, res) => {
 
         try{
     
-            const userUpdate = await users.updateOne({_id: id},
+            const userUpdate = await users.updateOne({_id: id}, 
                 {$set : {
                     photo: photo,
                     name: name,

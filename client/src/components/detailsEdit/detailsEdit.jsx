@@ -44,19 +44,19 @@ const DetailsEdit = () => {
         e.preventDefault();
         const name = e.target.elements.name.value;
         const bio = e.target.elements.bio.value;
-        const phone = e.target.elements.phone .value;
+        const phone = e.target.elements.phone.value;
         const email = e.target.elements.email.value;
         const password = e.target.elements.password.value;
 
-        const userEdit = {
+        /*const userRegister = {
             name: name,
             bio: bio,
             phone: phone,
             email: email,
             password: password
-        }
+        }*/
 
-        await registerContext(userEdit);
+        await registerContext(name, bio, phone, email, password);
       }
 
         return(
@@ -69,10 +69,9 @@ const DetailsEdit = () => {
                 <p>Changes will be reflected to every service</p>
 
                 <form onSubmit={(e) => registerUser(e)}>
-                    <div>
-                        <img src="" alt=""></img>
-                        <button>change photo</button>
-                    </div>
+
+
+                 
                     <div className='mt-6'>
                         <label for="name">name</label><br></br>
                         <input className='form-input' type="text" name="name" placeholder="enter your name..."></input>
@@ -114,3 +113,8 @@ const DetailsEdit = () => {
 }
 
 export default DetailsEdit;
+
+/*   <div>
+                        <img src="" alt=""></img>
+                        <button>change photo</button>
+                    </div>*/

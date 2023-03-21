@@ -1,8 +1,8 @@
 import axios from "axios";
 
-export const LoginRequest = () => axios.post("/login");
+export const LoginRequest = (email, password) => axios.post("/login", email, password);
 
-export const RegisterRequest = () => axios.post("/registerUser");
+export const RegisterRequest = (name, bio, phone, email, password) => axios.post("/registerUser", name, bio, phone, email, password);
 
 export const DetailsRequest = (id) => axios.get(`/details/${id}`);
 

@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import { RegisterRequest, DetailsRequest } from "../api/request";
+import { LoginRequest, RegisterRequest, DetailsRequest, EditRequest } from "../api/request";
 
 
 const UserContext = createContext();
@@ -13,12 +13,20 @@ export const UserContextProvider = ({children}) => {
         setUserDetail(res.data);
     }
 
-    const registerContext = async (userEdit) => {
-        await RegisterRequest(userEdit);
+    const enterUser = async (email, password) => {
+        await LoginRequest(email, password);
+    }
+
+    const registerContext = async (name, bio, phone, email, password) => {
+        await RegisterRequest(name, bio, phone, email, password);
+    }
+
+    const editUserContext = async (id) => {
+        await EditRequest(id);
     }
 
     return(
-        <UserContext.Provider value={{getUserDetails, registerContext, userDetail}}>{children}</UserContext.Provider>
+        <UserContext.Provider value={{getUserDetails, enterUser, registerContext, editUserContext, userDetail}}>{children}</UserContext.Provider>
     )
 }
 

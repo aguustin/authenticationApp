@@ -21,6 +21,31 @@ const GoogleStrategy = (googleAuth20).Strategy;
       }
     ));
 
+    const GithubStrategy = (githubAuth20).Strategy;
+
+    passport.use(new GithubStrategy({
+        clientID: process.env.CLIENT_GITHUB_ID,
+        clientSecret: process.env.SECRET_GITHUB_ID,
+        callbackURL: "/github/callback"
+      },
+      function(accessToken, refreshToken, profile, cb) {
+          return cb(null, profile);
+      }
+    ));
+
+    /*const TwitterStrategy = (twitterAuth20).Strategy;
+
+    passport.use(new TwitterStrategy({
+        consumerKey: process.env.TWITTER_CONSUMER_KEY,
+        consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
+        callbackURL: "/twitter/callback"
+      },
+      function(accessToken, refreshToken, profile, cb) {
+          return cb(null, profile);
+      }
+    ));*/
+
+
     passport.serializeUser((user, done) => {
         done(null, user);
     })
@@ -36,8 +61,26 @@ const GoogleStrategy = (googleAuth20).Strategy;
         successRedirect: "http://localhost:3000/details",
         failureRedirect: "/",
         scope: ['email', 'profile'] }
-        )
-        );
+        ));
+    
+    router.get("/github/callback",
+    passport.authenticate('github',
+    {
+        successRedirect: "http://localhost:3000/details",
+        failureRedirect: "/",
+        scope: ['email', 'profile']
+    }
+    ));
+
+    /*router.get("/twitter/callback",
+        passport.authenticate('twitter',
+        {
+            successRedirect: "http://localhost:3000/details",
+            failureRedirect: "/",
+            scope: ['email', 'profile'] }
+            )
+        );*/
+    
 
 /*const FacebookStrategy = (facebookAuth20).Strategy;
 
@@ -54,8 +97,8 @@ const GoogleStrategy = (googleAuth20).Strategy;
     const GithubStrategy = (githubAuth20).Strategy;
 
     passport.use(new GithubStrategy({
-        clientID: FACEBOOK_APP_ID,
-        clientSecret: FACEBOOK_APP_SECRET,
+        clientID: process.env.CLIENT_GITHUB_ID,
+        clientSecret: process.env.SECRET_GITHUB_ID,
         callbackURL: "/github/callback"
       },
       function(accessToken, refreshToken, profile, cb) {
@@ -63,17 +106,6 @@ const GoogleStrategy = (googleAuth20).Strategy;
       }
     ));
 
-    const TwitterStrategy = (twitterAuth20).Strategy;
-
-    passport.use(new TwitterStrategy({
-        consumerKey: TWITTER_CONSUMER_KEY,
-        consumerSecret: TWITTER_CONSUMER_SECRET,
-        callbackURL: "/twitter/callback"
-      },
-      function(accessToken, refreshToken, profile, cb) {
-          return cb(null, profile);
-      }
-    ));
 
     passport.serializeUser((user, done) => {
         done(null, user);
