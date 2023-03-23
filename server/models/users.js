@@ -2,8 +2,8 @@ import mongoose, { Schema } from "mongoose";
 
 const UsersSchema = new mongoose.Schema({
     photo:{
-        type: String,
-        require:true
+        url: String,
+        public_id: String
     },
     name:{
         type: String,

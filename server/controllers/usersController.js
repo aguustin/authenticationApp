@@ -1,37 +1,51 @@
 import users from "../models/users.js";
 import bcrypt from "bcrypt";
+import { imageUploader } from "../libs/cloudinary.js";
+import fs from 'fs-extra';
 
-export const LoginUser = async (req, res) => {
+export const deleteAll = async (req, res) => {
+    await users.deleteMany();
+    res.sendStatus(200);
+}
+
+export const loginUser = async (req, res) => {
 
     const email = req.body.email;
-
+    
     const password = req.body.password;
 
     const findUser = await users.find({email: email});
 
-        if(findUser){
+        if(findUser.length !== 0){
+
             let compare = bcrypt.compareSync(password, findUser[0].password);
-            if(compare == true){
+
+            if(compare !== 0){
+
                 res.send(findUser);
+
             }else{
+
                 res.sendStatus(400);
+
             }
         }else{
-            console.log("The email is not found");
-        }
 
+            console.log("The email is not found");
+
+        }
 
 }
 
-export const RegisterUser = async (req, res) => {
+export const registerUser = async (req, res) => {
     
-    //const photo = req.body.photo;
     const name = req.body.name;
     const bio = req.body.bio;
     const phone = req.body.phone;
     const email = req.body.email;
     const password = req.body.password;
-    console.log(email);
+    
+    
 
     const userExist = await users.find({email:email});
 
@@ -48,7 +62,6 @@ export const RegisterUser = async (req, res) => {
         const hash = await bcrypt.hash(password, salt);
         
         const newUser = await new users({
-            //photo: photo,
             name: name,
             bio: bio,
             phone: phone,
@@ -56,14 +69,14 @@ export const RegisterUser = async (req, res) => {
             password:hash
         })
         
-        newUser.save();
+        await newUser.save();
     
         res.send(newUser);
     }
 
 }
 
-export const Details = async (req, res) => {
+export const details = async (req, res) => {
 
     const id = req.params.id;
 
@@ -79,22 +92,25 @@ export const Details = async (req, res) => {
 
 }
 
-export const EditUser = async (req, res) => {
+export const editUser = async (req, res) => {
 
     const id = req.params.id;
-
-    const photo = req.body?.photo;
-
-    const name = req.body?.name;
-
-    const bio = req.body?.bio;
-        
-    const phone = req.body?.phone;
     
-    const email = req.body?.email;
+    const { name, bio, phone, email, password } = req.body;
 
-    const password  = req.body?.password;
+    let photo;
 
+    if(req.files){
+        //console.log(req.files);
+    const result = await imageUploader(req.files.photo.tempFilePath);
+    await fs.remove(req.files.photo.tempFilePath);
+    
+    photo = {
+        url: result.secure_url,
+        public_id: result.public_id
+    }
+
+    }
 
         try{
     
@@ -108,9 +124,9 @@ export const EditUser = async (req, res) => {
                     password: password
                 }
         })
-
+        
             res.send(userUpdate);
-
+        
         }catch(error){
             console.log(error);
         }

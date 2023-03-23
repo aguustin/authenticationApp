@@ -8,7 +8,6 @@ import cookieSession from "cookie-session";
 import userRoutes from "./routes/userRoutes.js";
 import socialRoutes from "./routes/socialRoutes.js";
 
-
 const app = express();
 
 connectionDb();
@@ -16,9 +15,9 @@ connectionDb();
 //settings
 
 //middlewares
-app.use(express.json());
 app.use(express.text());
-app.use(urlencoded({extended: false}));
+app.use(express.json());
+app.use(express.urlencoded({extended: false}));
 app.use(fileUpload({
     useTempFiles: true,
     tempFileDir: './usersImg',
@@ -35,7 +34,6 @@ app.use(passport.session());
 app.use(morgan('tiny'));
 
 //routes
-
 app.use(userRoutes);
 app.use(socialRoutes);
 
