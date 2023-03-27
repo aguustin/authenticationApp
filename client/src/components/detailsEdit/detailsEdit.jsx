@@ -1,12 +1,16 @@
 import './detailsEdit.css';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import DetailsBody from '../detailsBody/detailsBody';
 import UserContext from '../../userContext/userContex';
 
 const DetailsEdit = () => {
 
-    const { session } = useContext(UserContext);
-    
+    const { session, setSession } = useContext(UserContext);
+
+    useEffect(() => {
+        setSession(JSON.parse(localStorage.getItem("credentials")));
+    }, []);
+
     const Details = () => {
         return(
             <div className='details mx-auto rounded-3xl'>

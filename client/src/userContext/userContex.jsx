@@ -6,18 +6,15 @@ const UserContext = createContext();
 
 export const UserContextProvider = ({children}) => {
 
-   
-    const [userDetail, setUserDetail] = useState([]);
     const [session, setSession] = useState([]);
 
     const getUserDetails = async (id) => {
         const res = await detailsRequest(id);
-        setUserDetail(res.data);
+        console.log(res);
     }
 
     const enterUser = async (email, password) => {
         const res = await loginRequest(email, password);
-        setUserDetail(res.data);
         localStorage.setItem("credentials", JSON.stringify(res.data));
         setSession(JSON.parse(localStorage.getItem("credentials")));
         return 1;
@@ -33,7 +30,7 @@ export const UserContextProvider = ({children}) => {
     }
 
     return(
-        <UserContext.Provider value={{getUserDetails, enterUser, registerContext, editUserContext, setUserDetail, userDetail, setSession, session}}>{children}</UserContext.Provider>
+        <UserContext.Provider value={{getUserDetails, enterUser, registerContext, editUserContext, setSession, session}}>{children}</UserContext.Provider>
     )
 }
 
