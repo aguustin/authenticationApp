@@ -5,7 +5,7 @@ import facebook from '../../img/Facebook.svg';
 import github from '../../img/Gihub.svg';
 import google from '../../img/Google.svg';
 import twitter from '../../img/Twitter.svg';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useContext } from 'react';
 import UserContext from '../../userContext/userContex';
 import { useNavigate } from 'react-router-dom';
@@ -16,6 +16,16 @@ const LoginRegister = () => {
     const navigate = useNavigate();
     const {enterUser, registerContext} = useContext(UserContext);
     const [changeForm, setChangeForm] = useState(true);
+
+    const {session, setSession} = useContext(UserContext);
+
+    useEffect(() => {
+        setSession(JSON.parse(localStorage.getItem("credentials")));
+        console.log(session[0]);
+        if(session.length > 0){
+            navigate("/details");
+        }
+    }, []);
    
     const googleAcount = () => {
         window.open(
@@ -71,33 +81,45 @@ const LoginRegister = () => {
           return(
               
              
-              <div className='rounded-3xl'>
+              <div>
                  <button> Back</button>
-              <div className='edit mx-auto'>
+              <div className='register mx-auto rounded-3xl'>
                   <h2>Change Info</h2>
                   <p>Changes will be reflected to every service</p>
   
                   <form method='POST' onSubmit={(e) => registerUser(e)}>
-                
-                      <div className='form-input mt-6'>
-                          <label for="name">name</label><br></br>
-                          <input type="text" name="name" placeholder="enter your name..."></input>
+                    <div className='mt-6'>
+                        <label for="name">name</label><br></br>
+                        <div className='form-input'>
+                            <input type="text" name="name" placeholder="enter your name..."></input>
+                        </div>
+                    </div>
+
+                      <div className='mt-6'>
+                        <label for="bio">bio</label><br></br>
+                        <div className="form-input">
+                            <textarea type="text" name="bio" placeholder="enter your bio..."></textarea>
+                        </div>
                       </div>
-                      <div className="form-input">
-                          <label for="bio">bio</label><br></br>
-                          <textarea type="text" name="bio" placeholder="enter your bio..."></textarea>
+                      <div className='mt-6'>
+                        <label for="phone">phone</label><br></br>
+                        <div className="form-input">
+                            <input type="text" name="phone" placeholder="enter your phone..."></input>
+                        </div>
                       </div>
-                      <div className="form-input">
-                          <label for="phone">phone</label><br></br>
-                          <input type="text" name="phone" placeholder="enter your phone..."></input>
+
+                      <div className='mt-6'>
+                        <label for="email">email</label><br></br>
+                        <div className="form-input">
+                            <input type="text" name="email" placeholder="enter your email..."></input>
+                        </div>
                       </div>
-                      <div className="form-input">
-                          <label for="email">email</label><br></br>
-                          <input type="text" name="email" placeholder="enter your email..."></input>
-                      </div>
-                      <div className="form-input">
-                          <label for="password">password</label><br></br>
-                          <input type="password" name="password" placeholder="enter your new password..."></input>
+
+                      <div className='mt-6'>
+                        <label for="password">password</label><br></br>
+                        <div className="form-input">
+                            <input type="password" name="password" placeholder="enter your new password..."></input>
+                        </div>
                       </div>
   
                       <button type="submit" id="save">Save</button>
@@ -143,8 +165,7 @@ const LoginRegister = () => {
                     <div className='form-input'>
                         <input className="rounded-xl" type="password" name="password" placeholder="Password"></input>
                     </div>
-                    { changeForm ? <button className='form-button rounded-xl font-bold' type="submit">Start Coding Now</button>
-                     : <button className='form-button rounded-xl font-bold' type="submit">Login</button> }
+                    <button className='startCoding rounded-xl font-bold' type="submit">Start Coding Now</button>
                 </form>
               
                 <div className='social'>

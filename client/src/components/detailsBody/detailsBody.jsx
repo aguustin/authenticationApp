@@ -1,15 +1,30 @@
 import { useContext, useState } from 'react';
 import UserContext from '../../userContext/userContex';
+import './detailsBody.css';
 
 const DetailsBody = (user) => {
 
     const [detailsBody, setDetailsBody] = useState(true);
+    const [imageFile, setImageFile] = useState([]);
+    const [dropImage, setDropImage] = useState(true);
     const [image, setImage] = useState([]);
 
     const {editUserContext} = useContext(UserContext);
 
-    
 
+    const changeImage = (e) => {
+
+        e.preventDefault();
+        setImage(e.target.files[0]);
+        const reader = new FileReader();
+        reader.readAsDataURL(e.target.files[0]);
+        reader.onload = (e) => {
+            setImageFile(e.target.result);
+        };
+        setDropImage(false);
+        
+    }
+    
     const edit = async (e, id) => {
         e.preventDefault();
         const name = e.target.elements.name.value;
@@ -34,30 +49,32 @@ const DetailsBody = (user) => {
 
     const SeeInfo = () => {
         return(
-            <div>
-            <form>
+            <div className='detailsBody mx-auto'>
+            <form className='form-detailsBody text-left'>
                 <div>
                     <label>Photo</label>
-                    {user.user.photo?.url.length === 0 ? <img src="" alt=""></img> : <img src={user.user.photo?.url} alt=""></img>}
+                    <div className='photo'>
+                        {user.user.photo?.url.length === 0 ? <img src="" alt=""></img> : <img src={user.user.photo?.url} alt=""></img>}
+                    </div>
                 </div>
-                <div>
-                    <label>Name</label>
-                    <textarea type="text" disabled="true" name="name" value={user.user.name} ></textarea>
+                <div className='details-div-input'>
+                    <label>Name</label><br></br>
+                    <input type="text" disabled="true" name="name" value={user.user.name} ></input>
                 </div>
-                <div>
-                    <label>Bio</label>
+                <div className='details-div-input'>
+                    <label>Bio</label><br></br>
                     <textarea type="text" disabled="true" name="bio" value={user.user.bio} ></textarea>
                 </div>
-                <div>
-                    <label>Phone</label>
+                <div className='details-div-input'>
+                    <label>Phone</label><br></br>
                     <input type="text" disabled="true" name="phone" value={user.user.phone}  ></input>
                 </div>
-                <div>
-                    <label>Email</label>
+                <div className='details-div-input'>
+                    <label>Email</label><br></br>
                     <input type="text" disabled="true" name="email" value={user.user.email}  ></input>
                 </div>
-                <div>
-                    <label>Password</label>
+                <div className='details-div-input'>
+                    <label>Password</label><br></br>
                     <input type="text" disabled="true" name="password" value={user.user.password} placeholder={user.password}></input>
                 </div>
             </form>
@@ -69,37 +86,38 @@ const DetailsBody = (user) => {
 
     const EditInfo = () => {
         return (
-            <div>
-                <form onSubmit={(e) => edit(e, user.user._id)} encType="multipart/form-data">
-                    { image.length === 0 ? <img src="" alt=""></img> :  <img src={image.name} alt=""></img> }
+            <div className='detailsBody mx-auto'>
+                <form className='form-detailsBody text-left' onSubmit={(e) => edit(e, user.user._id)} encType="multipart/form-data">
+                    { dropImage ? null :  <img src={imageFile} alt=""></img> }
                     <div>
-                        <label>Photo</label>
-                        <input type="file" name="photo" onChange={(e) => setImage(e.target.files[0])}></input>
+                        <label>Photo</label><br></br>
+                        <input type="file" accept='image/*' name="photo" onChange={(e) => changeImage(e)}></input>
                     </div>
-                    <div>
-                        <label>Name</label>
-                        <textarea type="text" name="name" placeholder='New name'></textarea>
+                    <div className='details-div-input'>
+                        <label>Name</label><br></br>
+                        <input type="text" name="name" placeholder='New name'></input>
                     </div>
-                    <div>
-                        <label>Bio</label>
-                        <textarea type="text" name="bio" placeholder='New bio'></textarea>
+                    <div className='details-div-input'>
+                        <label>Bio</label><br></br>
+                        <textarea type="text" name="bio" placeholder='Write something about you'></textarea>
                     </div>
-                    <div>
-                        <label>Phone</label>
+                    <div className='details-div-input'>
+                        <label>Phone</label><br></br>
                         <input type="text" name="phone" placeholder='New phone'></input>
                     </div>
-                    <div>
-                        <label>Email</label>
+                    <div className='details-div-input'>
+                        <label>Email</label><br></br>
                         <input type="text" name="email" placeholder='New email'></input>
                     </div>
-                    <div>
-                        <label>Password</label>
+                    <div className='details-div-input'>
+                        <label>Password</label><br></br>
                         <input type="text" name="password" placeholder='New password'></input>
                     </div>
-                    <button type='submit'>Save Changes</button>
+                    <div className='form-detailsBody-buttons text-center'>
+                        <button id="saveChanges" type='submit'>Save Changes</button>
+                        <button onClick={() => setDetailsBody(!detailsBody)}>Cancel Edit</button>
+                    </div>
                 </form>
-                <button onClick={() => setDetailsBody(!detailsBody)}>Cancel Edit</button>
-                
             </div>
         )
     }
@@ -113,5 +131,7 @@ const DetailsBody = (user) => {
 
    
 }
+
+//      <input type="file" accept='image/*' name="photo" onChange={(e) => setImage(e.target.files[0])}></input>
 
 export default DetailsBody;

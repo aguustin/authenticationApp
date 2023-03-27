@@ -1,0 +1,44 @@
+.detailsBody{
+    width: 90%;
+}
+
+.form-detailsBody-buttons button{
+    margin: 10px;
+    margin-top: 1.7rem;
+    border-radius: 5px;
+}
+
+
+.photo{
+    max-width: 150px;
+    max-height: 350px;
+}
+
+.photo img{
+    border-radius: 10px;
+}
+
+.details-div-input{
+    padding: .6rem .6rem;
+}
+
+.details-div-input textarea {
+    width: 100%;
+    outline: none;
+}
+
+.details-div-input input {
+    background-color: none;
+    outline: none;
+    border-top: transparent;
+    border-left: transparent;
+    border-right: transparent;
+    border-bottom: 1px solid rgb(196, 196, 196);
+    width: 100%;
+    padding-top: .7rem;
+}
+
+#saveChanges{
+  color: white;
+  background-color: rgb(52, 52, 224);
+}

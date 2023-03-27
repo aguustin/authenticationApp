@@ -8,7 +8,7 @@ export const UserContextProvider = ({children}) => {
 
    
     const [userDetail, setUserDetail] = useState([]);
-    const [session, setSession] = useState();
+    const [session, setSession] = useState([]);
 
     const getUserDetails = async (id) => {
         const res = await detailsRequest(id);
