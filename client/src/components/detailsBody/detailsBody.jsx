@@ -1,5 +1,6 @@
 import { useContext, useState } from 'react';
 import UserContext from '../../userContext/userContex';
+import { Link } from 'react-router-dom';
 import './detailsBody.css';
 
 const DetailsBody = (user) => {
@@ -51,10 +52,10 @@ const DetailsBody = (user) => {
         return(
             <div className='detailsBody mx-auto'>
             <form className='form-detailsBody text-left'>
-                <div>
+                <div className='text-center mt-6'>
                     <label>Photo</label>
                     <div className='photo'>
-                        {user.user.photo?.url.length === 0 ? <img src="" alt=""></img> : <img src={user.user.photo?.url} alt=""></img>}
+                        {user.user.photo?.url.length === 0 ? <img src="" alt=""></img> : <img className='mx-auto' src={user.user.photo?.url} alt=""></img>}
                     </div>
                 </div>
                 <div className='details-div-input'>
@@ -79,6 +80,7 @@ const DetailsBody = (user) => {
                 </div>
             </form>
             <button onClick={() => setDetailsBody(!detailsBody)}>Edit</button>
+            <Link to="/shoppingify">Enter</Link>
         </div>
     )
         

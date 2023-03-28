@@ -11,7 +11,7 @@ const router = Router();
 
 const GoogleStrategy = (googleAuth20).Strategy;
 
-    passport.use(new GoogleStrategy({
+   passport.use(new GoogleStrategy({
         clientID: process.env.CLIENT_ID,
         clientSecret: process.env.CLIENT_SECRET_ID,
         callbackURL: "/google/callback"
@@ -20,8 +20,8 @@ const GoogleStrategy = (googleAuth20).Strategy;
           return cb(null, profile);
       }
     ));
-
-    const GithubStrategy = (githubAuth20).Strategy;
+    
+const GithubStrategy = (githubAuth20).Strategy;
 
     passport.use(new GithubStrategy({
         clientID: process.env.CLIENT_GITHUB_ID,

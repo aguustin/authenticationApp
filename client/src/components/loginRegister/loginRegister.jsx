@@ -27,11 +27,12 @@ const LoginRegister = () => {
         }
     }, []);
    
-    const googleAcount = () => {
+    const googleAcount = async () => {
         window.open(
             `http://localhost:4000/google/callback`,
             "_self"
         );
+
     };
 
     const facebookAcount = () => {

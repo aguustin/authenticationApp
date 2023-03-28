@@ -9,9 +9,10 @@
 }
 
 
-.photo{
-    max-width: 150px;
-    max-height: 350px;
+.photo img{
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
 }
 
 .photo img{
