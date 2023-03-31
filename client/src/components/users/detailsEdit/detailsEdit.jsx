@@ -1,19 +1,19 @@
 import './detailsEdit.css';
 import { useContext, useEffect } from 'react';
 import DetailsBody from '../detailsBody/detailsBody';
-import UserContext from '../../userContext/userContex';
+import UserContext from '../../../userContext/userContex';
+import Navegation from '../navigation/navigation';
 
 const DetailsEdit = () => {
 
-    const { session, setSession } = useContext(UserContext);
+    const { session } = useContext(UserContext);
 
-    useEffect(() => {
-        setSession(JSON.parse(localStorage.getItem("credentials")));
-    }, []);
+    console.log("session:" , session);
 
     const Details = () => {
         return(
             <div className='details mx-auto rounded-3xl'>
+                 <Navegation/>
                     <p>Profile</p>
                     <p>Basic info, like your name and photo</p>
                     <table className="detailsEdit table-fixed text-left mx-auto">
@@ -24,7 +24,8 @@ const DetailsEdit = () => {
                         </div>
                     </thead>
                  </table>
-                 {session.map(user =>
+                 {
+                 session.map(user =>
                         <DetailsBody user={user} key={user._id} />
                  )}
             </div>

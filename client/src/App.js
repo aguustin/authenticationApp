@@ -1,10 +1,11 @@
 import './App.css';
-import DetailsEdit from './components/detailsEdit/detailsEdit';
-import LoginRegister from './components/loginRegister/loginRegister';
-import Navigation from './components/navigation/navigation';
-import SignOut from './components/signOut/signOut';
+import DetailsEdit from './components/users/detailsEdit/detailsEdit';
+import LoginRegister from './components/users/loginRegister/loginRegister';
+import SignOut from './components/users/signOut/signOut';
 import {BrowserRouter, Routes, Route } from 'react-router-dom';
 import { UserContextProvider } from './userContext/userContex';
+import { ShoppingifyContextProvider } from './shoppingifyContext/shoppingifyContext';
+import AllProducts from './components/shoppingify/allProducts/allProducts';
 
 
 function App() {
@@ -15,12 +16,14 @@ function App() {
     <div className="App">
       <BrowserRouter>
       <UserContextProvider>
-        <Navigation/>
+        <ShoppingifyContextProvider>
         <Routes>
           <Route path="/" element={<LoginRegister/>}></Route>
           <Route path="/details" element={<DetailsEdit/>}></Route>
-          <Route path="/signOut" element={<SignOut/>}></Route> 
+          <Route path="/signOut" element={<SignOut/>}></Route>
+          <Route path="/products" element={<AllProducts/>}></Route> 
         </Routes>
+        </ShoppingifyContextProvider>
       </UserContextProvider>
       </BrowserRouter>
     </div>

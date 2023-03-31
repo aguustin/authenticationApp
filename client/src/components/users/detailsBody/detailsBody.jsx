@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import UserContext from '../../userContext/userContex';
+import UserContext from '../../../userContext/userContex';
 import { Link } from 'react-router-dom';
 import './detailsBody.css';
 
@@ -18,7 +18,7 @@ const DetailsBody = (user) => {
         e.preventDefault();
         setImage(e.target.files[0]);
         const reader = new FileReader();
-        reader.readAsDataURL(e.target.files[0]);
+        reader.readAsDataURL(e.target?.files[0]);
         reader.onload = (e) => {
             setImageFile(e.target.result);
         };
@@ -45,11 +45,11 @@ const DetailsBody = (user) => {
 
         await editUserContext(id, editUserOb);
 
-        setDetailsBody(!detailsBody);
     }
 
     const SeeInfo = () => {
         return(
+            
             <div className='detailsBody mx-auto'>
             <form className='form-detailsBody text-left'>
                 <div className='text-center mt-6'>
@@ -60,27 +60,27 @@ const DetailsBody = (user) => {
                 </div>
                 <div className='details-div-input'>
                     <label>Name</label><br></br>
-                    <input type="text" disabled="true" name="name" value={user.user.name} ></input>
+                    <input type="text" disabled="true" name="name" value={user.user?.name} ></input>
                 </div>
                 <div className='details-div-input'>
                     <label>Bio</label><br></br>
-                    <textarea type="text" disabled="true" name="bio" value={user.user.bio} ></textarea>
+                    <textarea type="text" disabled="true" name="bio" value={user.user?.bio} ></textarea>
                 </div>
                 <div className='details-div-input'>
                     <label>Phone</label><br></br>
-                    <input type="text" disabled="true" name="phone" value={user.user.phone}  ></input>
+                    <input type="text" disabled="true" name="phone" value={user.user?.phone}  ></input>
                 </div>
                 <div className='details-div-input'>
                     <label>Email</label><br></br>
-                    <input type="text" disabled="true" name="email" value={user.user.email}  ></input>
+                    <input type="text" disabled="true" name="email" value={user.user?.email}  ></input>
                 </div>
                 <div className='details-div-input'>
                     <label>Password</label><br></br>
-                    <input type="text" disabled="true" name="password" value={user.user.password} placeholder={user.password}></input>
+                    <input type="text" disabled="true" name="password" value={user.user?.password} placeholder={user?.password}></input>
                 </div>
             </form>
             <button onClick={() => setDetailsBody(!detailsBody)}>Edit</button>
-            <Link to="/shoppingify">Enter</Link>
+            <Link to="/products">Enter</Link>
         </div>
     )
         
@@ -89,7 +89,7 @@ const DetailsBody = (user) => {
     const EditInfo = () => {
         return (
             <div className='detailsBody mx-auto'>
-                <form className='form-detailsBody text-left' onSubmit={(e) => edit(e, user.user._id)} encType="multipart/form-data">
+                <form className='form-detailsBody text-left' onSubmit={(e) => edit(e, user.user?._id)} encType="multipart/form-data">
                     { dropImage ? null :  <img src={imageFile} alt=""></img> }
                     <div>
                         <label>Photo</label><br></br>

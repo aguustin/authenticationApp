@@ -1,9 +1,9 @@
 
 import { Link } from 'react-router-dom';
-import devchallenge from '../../img/devchallenges.svg';
+import devchallenge from '../img/devchallenges.svg';
 
 
-const Navigation = () => {
+const Navegation = () => {
 
 
     return(
@@ -21,4 +21,4 @@ const Navigation = () => {
     )
 }
 
-export default Navigation;
+export default Navegation;

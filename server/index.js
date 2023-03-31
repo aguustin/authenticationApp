@@ -5,9 +5,9 @@ import { PORT } from "./config.js";
 import { connectionDb } from "./db.js";
 import passport from "passport";
 import cookieSession from "cookie-session";
-import userRoutes from "./routes/userRoutes.js";
-import socialRoutes from "./routes/socialRoutes.js";
-
+import userRoutes from "./routes/infoRoutes/userRoutes.js";
+import socialRoutes from "./routes/infoRoutes/socialRoutes.js";
+import shoppingifyRoutes from "./routes/shoppingifyRoutes/shoppingifyRoutes.js";
 const app = express();
 
 connectionDb();
@@ -36,7 +36,7 @@ app.use(morgan('tiny'));
 //routes
 app.use(userRoutes);
 app.use(socialRoutes);
-
+app.use(shoppingifyRoutes);
 //listen
 app.listen(PORT);
 

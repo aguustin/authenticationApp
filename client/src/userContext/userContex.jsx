@@ -26,7 +26,10 @@ export const UserContextProvider = ({children}) => {
 
     const editUserContext = async (id, editUserOb) => {
         console.log(id);
-        await editRequest(id, editUserOb);
+        const res = await editRequest(id, editUserOb);
+        const saveLocal = localStorage.setItem("credentials", JSON.stringify(res.data));
+        setSession(session.map((infoChanges) => (infoChanges._id === id ? saveLocal : infoChanges)));
+        console.log("s", session);
     }
 
     return(

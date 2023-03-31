@@ -1,0 +1,10 @@
+.list{
+    padding-top: 1.5rem;
+}
+
+.addItem{
+    background-color: rgb(129, 49, 196);
+    border-radius: 16px;
+    color: white;
+    width: 350px;
+}

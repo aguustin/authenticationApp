@@ -1,15 +1,15 @@
 import './loginRegister.css';
 //import devchallengesLight from '../../img/devchallenges-light.svg';
-import devchallenges from '../../img/devchallenges.svg';
-import facebook from '../../img/Facebook.svg';
-import github from '../../img/Gihub.svg';
-import google from '../../img/Google.svg';
-import twitter from '../../img/Twitter.svg';
+import devchallenges from '../img/devchallenges.svg';
+import facebook from '../img/Facebook.svg';
+import github from '../img/Gihub.svg';
+import google from '../img/Google.svg';
+import twitter from '../img/Twitter.svg';
 import { useEffect, useState } from 'react';
 import { useContext } from 'react';
-import UserContext from '../../userContext/userContex';
+import UserContext from '../../../userContext/userContex';
 import { useNavigate } from 'react-router-dom';
-
+import Navegation from '../navigation/navigation';
 
 const LoginRegister = () => {
 
@@ -20,11 +20,13 @@ const LoginRegister = () => {
     const {session, setSession} = useContext(UserContext);
 
     useEffect(() => {
+
         setSession(JSON.parse(localStorage.getItem("credentials")));
-        console.log(session[0]);
+
         if(session.length > 0){
             navigate("/details");
         }
+        
     }, []);
    
     const googleAcount = async () => {
@@ -83,8 +85,9 @@ const LoginRegister = () => {
               
              
               <div>
+                <Navegation/>
                  <button> Back</button>
-              <div className='register mx-auto rounded-3xl'>
+                 <div className='register mx-auto rounded-3xl'>
                   <h2>Change Info</h2>
                   <p>Changes will be reflected to every service</p>
   

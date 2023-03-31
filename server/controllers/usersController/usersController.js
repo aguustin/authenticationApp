@@ -1,6 +1,6 @@
-import users from "../models/users.js";
+import users from "../../models/users.js";
 import bcrypt from "bcrypt";
-import { imageUploader } from "../libs/cloudinary.js";
+import { imageUploader } from "../../libs/cloudinary.js";
 import fs from 'fs-extra';
 
 export const deleteAll = async (req, res) => {
