@@ -1,72 +1,96 @@
 import { useState } from "react";
 import './list.css';
 import source from '../../imgs/source.svg';
+import lapiz from '../../imgs/lapiz.png';
+import AddNewItem from "../addNewItem/addNewItem";
 
 const List = () => {
 
     const [listLayout, setListLayout] = useState(true);
     const [addItemLayout, setAddItemLayout] = useState(false);
-    const [itemDetailsLayout, setItemDetailsLayout] = useState(false);
 
-    const setList = () => {
+    const setAddItem = () => {
         setListLayout(false);
         setAddItemLayout(true);
     }
 
-    const setAddItem = () => {
-        setAddItemLayout(false);
-        setItemDetailsLayout(true);
-    }
 
-    const setItemDetails = () => {
-        setItemDetailsLayout(false);
-        setListLayout(true);
-    }
-
-    const ListQuantity = () => {
+     const ListQuantity = () => {
         return(
             <div className="list">
                 <div className="addItem mx-auto flex">
                     <div>
                         <img src={source} alt=""></img>
                     </div>
-                    <div>
-                        <p></p>
-                        <button>add item</button>
+                    <div className="dontFind">
+                        <p>Don`t find what you need?</p>
+                        <button onClick={() => setAddItem()}>add item</button> {/* crear nuevo item para que aparezca en la lista para agregar productos (en allProductsBody) */}
                     </div>
                 </div>
-                    <div>
-
+                    <div className="itemsList mx-auto ">
+                        <div className="flex space-x-52">
+                            <p>Shopping List</p>
+                            <img id="editar"  src={lapiz} alt=""></img>
+                        </div>
+                        <div className="categories_itemsQuantity text-left">
+                            <label>Fruits and vegetables</label> {/* datos de las categorias */}
+                            <div className="text-left">  {/* nombres de items y cantidad*/}
+                                <ul className="flex space-x-52">
+                                    <li><p>Chicken</p></li>
+                                    <li><button>3 pcs</button></li>
+                                </ul>
+                                <ul className="flex space-x-52">
+                                    <li><p>Chicken</p></li>
+                                    <li><button>3 pcs</button></li>
+                                </ul>
+                                <ul className="flex space-x-52">
+                                    <li><p>Chicken</p></li>
+                                    <li><button>3 pcs</button></li>
+                                </ul>
+                                <ul className="flex space-x-52">
+                                    <li><p>Chicken</p></li>
+                                    <li><button>3 pcs</button></li>
+                                </ul>
+                                <ul className="flex space-x-52">
+                                    <li><p>Chicken</p></li>
+                                    <li><button>3 pcs</button></li>
+                                </ul>
+                                <ul className="flex space-x-52">
+                                    <li><p>Chicken</p></li>
+                                    <li><button>3 pcs</button></li>
+                                </ul>
+                                <ul className="flex space-x-52">
+                                    <li><p>Chicken</p></li>
+                                    <li><button>3 pcs</button></li>
+                                </ul>
+                                <ul className="flex space-x-52">
+                                    <li><p>Chicken</p></li>
+                                    <li><button>3 pcs</button></li>
+                                </ul>
+                                <ul className="flex space-x-52">
+                                    <li><p>Chicken</p></li>
+                                    <li><button>3 pcs</button></li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 <div>
-                    <button onClick={() => setList()}>a</button>
+                    <form className="form_enter_name_item flex">
+                        <input type="text" name="enterNameItem" placeholder="Enter name"></input>
+                        <button>Save</button>
+                    </form>
                 </div>
                 
             </div>
         )
     }
 
-    const AddItem = () => {
-        return(
-            <div>
-            <button onClick={() => setAddItem()}>b</button>
-        </div>
-        )
-    }
 
-    const ItemDetails = () => {
-        return(
-            <div>
-            <button onClick={() => setItemDetails()}>c</button>
-        </div>
-        )
-    }
 
     return(
         <div>
             {listLayout ? <ListQuantity/> : null}
-            {addItemLayout ? <AddItem/> : null}
-            {itemDetailsLayout ? <ItemDetails/> : null}
+            {addItemLayout ? <AddNewItem/> : null}
         </div>
     )
 }
