@@ -16,7 +16,7 @@ const AllProducts = () => {
 
     return(
         
-        <div className='flex'>
+        <div className='allProducts flex'>
             <NavegationShopping/>
            <div className='allProductsNav'>
             <div className='flex mx-auto'>

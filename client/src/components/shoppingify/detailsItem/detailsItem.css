@@ -1,0 +1,28 @@
+.detailsItem{
+    width: 84%;
+    min-width: 300px;
+}
+
+.detailsItem img{
+    border-radius: 14px;
+}
+
+.detailsItem label{
+    color:rgb(175, 175, 175);
+    font-size: 15px;
+}
+
+.detailsItem p{
+    font-size: 20px;
+}
+
+.info > div{
+    margin-top: 2rem;
+}
+
+.save{
+    background-color: rgb(231, 132, 1);
+    border-radius: 10px;
+    color: white;
+    padding: 1rem 1.7rem;
+}

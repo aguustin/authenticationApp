@@ -24,7 +24,7 @@ const List = () => {
                     </div>
                     <div className="dontFind">
                         <p>Don`t find what you need?</p>
-                        <button onClick={() => setAddItem()}>add item</button> {/* crear nuevo item para que aparezca en la lista para agregar productos (en allProductsBody) */}
+                        <button onClick={() => setAddItem()}>add item</button> {/* abre la vista para agregar productos (en allProductsBody) */}
                     </div>
                 </div>
                     <div className="itemsList mx-auto ">
@@ -33,8 +33,8 @@ const List = () => {
                             <img id="editar"  src={lapiz} alt=""></img>
                         </div>
                         <div className="categories_itemsQuantity text-left">
-                            <label>Fruits and vegetables</label> {/* datos de las categorias */}
-                            <div className="text-left">  {/* nombres de items y cantidad*/}
+                            <label>Fruits and vegetables</label>               {/* datos de las categorias */}
+                            <div className="text-left">                        {/* nombres de items y cantidad*/}
                                 <ul className="flex space-x-52">
                                     <li><p>Chicken</p></li>
                                     <li><button>3 pcs</button></li>

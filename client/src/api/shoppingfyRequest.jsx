@@ -4,8 +4,10 @@ export const allProductsRequest = () => axios.get("/allProducts");
 
 export const productsByCategoryRequest = (category) => axios.get(`/productsByCategory/${category}`);
 
-export const categoryDividerRequest = () => axios.get("/categoryDivider");
-
 export const enterProductRequest = (newProduct) => axios.post("/enterProduct", newProduct);
+
+export const updateListRequest = () => axios.get("/updateList");
+
+export const deleteOneItem = (itemName) => axios.delete(`/deleteOneItem/${itemName}`);
 
 export const deleteAllProductsRequest = () => axios.delete("/deleteAllProducts");
