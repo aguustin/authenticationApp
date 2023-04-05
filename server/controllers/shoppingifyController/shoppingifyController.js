@@ -67,22 +67,25 @@ export const enterProduct = async (req, res) => {
 
 export const  addToListController = async (req, res) => {
 
-    const category = req.params.category;
-
     const name = req.params.name;
+
+    const category = req.params.category;
     
-    //const response =  await shoppingify.findOneAndUpdate({category: category}, {propierties: { $elemMatch: { name: name} } });
-    
-    const updateData = await shoppingify.updateOne(
+    const response =  await shoppingify.find({category: category}, {propierties: { $elemMatch: { name: name} } });
+
+    const noteData = response[0].propierties[0].note;
+
+    const imageData = response[0].propierties[0].image;
+
+     const updateData = await shoppingify.updateOne(
         { 'propierties.name': name},
         {
         $set: {
-            propierties: {name: name, quantity: 1, note, image, onList: true}  
+            propierties: {name: name, quantity: 1, note: noteData || null, image: imageData || null,  onList: true}  
         }
     }); 
 
     res.send(updateData);
-    
     
 }
 

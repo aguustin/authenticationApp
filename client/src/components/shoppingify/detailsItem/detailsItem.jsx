@@ -22,13 +22,14 @@ const DetailsItem = () => {
         setAddItemLayout(true);
     }
 
-    const saveItems = async (e, name, category, note) => {
+    const saveItems = async (e, name, category, note, image) => {
         e.preventDefault(e);
 
         const newProduct = {
             name: name,
             category: category,
-            note: note
+            note: note,
+            image: image
         }
 
         await saveItemContext(newProduct);
@@ -62,7 +63,7 @@ const DetailsItem = () => {
                         <form>
                             <div className='form-footer flex justify-center align-middle items-center space-x-1.5'>
                                         <button onClick={(e) => deleteItem(e, p.name)}>Cancel</button>
-                                        <button className="save" onClick={(e) => saveItems(e, p.name, p.category, p.note)}>Save</button>
+                                        <button className="save" onClick={(e) => saveItems(e, p.name, p.category, p.note, p.image)}>Save</button>
                             </div>
                         </form>
                     </div>

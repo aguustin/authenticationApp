@@ -24,7 +24,7 @@ const AllProductsBody = (p) => {
                 <div>
                     <h2>{p.category}</h2>
                     <div className='flex flex-wrap'>
-                    {obtain.map((o) => <button onClick={(e) => addToListQuantity(e, p.category, o, p.note, p.image)}><label className='itemName'>{o}</label><label className='agregar'>+</label></button>)}
+                    {obtain.map((o) => <button onClick={(e) => addToListQuantity(e, p.category, o)}><label className='itemName'>{o}</label><label className='agregar'>+</label></button>)}
                     </div>
                 </div> 
              </div>

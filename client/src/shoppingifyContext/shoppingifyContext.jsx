@@ -7,7 +7,7 @@ const ShoppingifyContext = createContext();
 export const ShoppingifyContextProvider = ({children}) => {
 
     const [products, setProducts] = useState([]);
-    const [productsInList, setProductsInList] = useState([]);
+    const [productsInList, setProductsInList] = useState([]); 
     const [productInprocessToSave, setProductInprocessToSave] = useState([]);
     const [listLayout, setListLayout] = useState();
     const [addItemLayout, setAddItemLayout] = useState();
@@ -16,8 +16,7 @@ export const ShoppingifyContextProvider = ({children}) => {
     const allProducts = async () => {
         const res = await allProductsRequest();
         setProducts(res.data);
-        products.map((p) => p.propierties.onList ? setProductsInList([p.propierties.onList]) : null)
-         console.log(productsInList);
+        //products.map((p) => p.propierties[0].onList === true ? setProductsInList(p) : null); 
     }
 
     const saveItemContext = async (newProduct) => {

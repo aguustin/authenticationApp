@@ -9,7 +9,7 @@ router.get("/productsByCategory/:category", productsByCategory);
 
 router.post("/enterProduct", enterProduct);
 
-router.put("/addToListQuantity/:category/:name", addToListController);
+router.patch("/addToListQuantity/:category/:name", addToListController);
 
 router.delete("/deleteAllProducts", deleteAllProducts);
 
