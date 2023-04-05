@@ -6,8 +6,6 @@ export const productsByCategoryRequest = (category) => axios.get(`/productsByCat
 
 export const enterProductRequest = (newProduct) => axios.post("/enterProduct", newProduct);
 
-export const updateListRequest = () => axios.get("/updateList");
-
-export const deleteOneItem = (itemName) => axios.delete(`/deleteOneItem/${itemName}`);
+export const addToListQuantityRequest = (category, name) => axios.post(`/addToListQuantity/${category}/${name}`);
 
 export const deleteAllProductsRequest = () => axios.delete("/deleteAllProducts");

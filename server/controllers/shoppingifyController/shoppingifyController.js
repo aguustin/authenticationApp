@@ -19,7 +19,7 @@ export const enterProduct = async (req, res) => {
 
     if(ifCategoryExist.length > 0){
        
-        await shoppingify.updateOne(
+        const update = await shoppingify.updateOne(
                 {category : category},
                 {
                 $addToSet: {
@@ -39,6 +39,8 @@ export const enterProduct = async (req, res) => {
             ]
          
         };
+
+        console.log(update);
         res.send(newUpdate);
 
     }else{
@@ -63,14 +65,25 @@ export const enterProduct = async (req, res) => {
 
 }
 
+export const  addToListController = async (req, res) => {
 
-export const deleteOneProduct = async (req, res) => {
-    
+    const category = req.params.category;
+
     const name = req.params.name;
- 
-    const response = await shoppingify.find({}, {propierties: { $elemMatch: { name: name } } } );
-                                           
-    res.send(response);
+    
+    //const response =  await shoppingify.findOneAndUpdate({category: category}, {propierties: { $elemMatch: { name: name} } });
+    
+    const updateData = await shoppingify.updateOne(
+        { 'propierties.name': name},
+        {
+        $set: {
+            propierties: {name: name, quantity: 1, note, image, onList: true}  
+        }
+    }); 
+
+    res.send(updateData);
+    
+    
 }
 
 export const deleteAllProducts = async (req, res) => {

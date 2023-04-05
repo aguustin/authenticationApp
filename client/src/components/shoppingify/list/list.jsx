@@ -39,38 +39,6 @@ const List = () => {
                                     <li><p>Chicken</p></li>
                                     <li><button>3 pcs</button></li>
                                 </ul>
-                                <ul className="flex space-x-52">
-                                    <li><p>Chicken</p></li>
-                                    <li><button>3 pcs</button></li>
-                                </ul>
-                                <ul className="flex space-x-52">
-                                    <li><p>Chicken</p></li>
-                                    <li><button>3 pcs</button></li>
-                                </ul>
-                                <ul className="flex space-x-52">
-                                    <li><p>Chicken</p></li>
-                                    <li><button>3 pcs</button></li>
-                                </ul>
-                                <ul className="flex space-x-52">
-                                    <li><p>Chicken</p></li>
-                                    <li><button>3 pcs</button></li>
-                                </ul>
-                                <ul className="flex space-x-52">
-                                    <li><p>Chicken</p></li>
-                                    <li><button>3 pcs</button></li>
-                                </ul>
-                                <ul className="flex space-x-52">
-                                    <li><p>Chicken</p></li>
-                                    <li><button>3 pcs</button></li>
-                                </ul>
-                                <ul className="flex space-x-52">
-                                    <li><p>Chicken</p></li>
-                                    <li><button>3 pcs</button></li>
-                                </ul>
-                                <ul className="flex space-x-52">
-                                    <li><p>Chicken</p></li>
-                                    <li><button>3 pcs</button></li>
-                                </ul>
                             </div>
                         </div>
                     </div>

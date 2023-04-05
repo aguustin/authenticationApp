@@ -7,10 +7,11 @@ import './allProducts.css';
 
 const AllProducts = () => {
 
-    const {allProducts, products} = useContext(ShoppingifyContext);
+    const {allProducts, products, productsInList} = useContext(ShoppingifyContext);
 
     useEffect(() => {
         allProducts();
+        console.log("products in list", productsInList);
     }, [])
 
 

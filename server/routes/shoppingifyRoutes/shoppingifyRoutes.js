@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { allProducts, productsByCategory, enterProduct, deleteOneProduct, deleteAllProducts} from "../../controllers/shoppingifyController/shoppingifyController.js";
+import { allProducts, productsByCategory, enterProduct, addToListController, deleteAllProducts} from "../../controllers/shoppingifyController/shoppingifyController.js";
 
 const router = Router();
 
@@ -9,7 +9,7 @@ router.get("/productsByCategory/:category", productsByCategory);
 
 router.post("/enterProduct", enterProduct);
 
-router.delete("/deleteOneItem/:name", deleteOneProduct);
+router.put("/addToListQuantity/:category/:name", addToListController);
 
 router.delete("/deleteAllProducts", deleteAllProducts);
 

@@ -7,7 +7,7 @@ import ShoppingifyContext from '../../../shoppingifyContext/shoppingifyContext';
 
 const DetailsItem = () => {
 
-    const {deleteItemContext, productInprocessToSave} = useContext(ShoppingifyContext);
+    const {saveItemContext, deleteItemContext, productInprocessToSave} = useContext(ShoppingifyContext);
 
 
     const [detailsLayout, setDetailsLayout] = useState(true);
@@ -22,8 +22,17 @@ const DetailsItem = () => {
         setAddItemLayout(true);
     }
 
-    const updateItems = async (e) => {
+    const saveItems = async (e, name, category, note) => {
         e.preventDefault(e);
+
+        const newProduct = {
+            name: name,
+            category: category,
+            note: note
+        }
+
+        await saveItemContext(newProduct);
+
         setDetailsLayout(false);
         setListLayout(true);
     }
@@ -53,7 +62,7 @@ const DetailsItem = () => {
                         <form>
                             <div className='form-footer flex justify-center align-middle items-center space-x-1.5'>
                                         <button onClick={(e) => deleteItem(e, p.name)}>Cancel</button>
-                                        <button className="save" onClick={(e) => updateItems(e)}>Save</button>
+                                        <button className="save" onClick={(e) => saveItems(e, p.name, p.category, p.note)}>Save</button>
                             </div>
                         </form>
                     </div>

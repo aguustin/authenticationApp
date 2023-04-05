@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import { allProductsRequest, enterProductRequest, updateListRequest,deleteOneItem } from "../api/shoppingfyRequest";
+import { allProductsRequest, enterProductRequest, addToListQuantityRequest } from "../api/shoppingfyRequest";
 
 
 const ShoppingifyContext = createContext();
@@ -7,6 +7,7 @@ const ShoppingifyContext = createContext();
 export const ShoppingifyContextProvider = ({children}) => {
 
     const [products, setProducts] = useState([]);
+    const [productsInList, setProductsInList] = useState([]);
     const [productInprocessToSave, setProductInprocessToSave] = useState([]);
     const [listLayout, setListLayout] = useState();
     const [addItemLayout, setAddItemLayout] = useState();
@@ -15,6 +16,8 @@ export const ShoppingifyContextProvider = ({children}) => {
     const allProducts = async () => {
         const res = await allProductsRequest();
         setProducts(res.data);
+        products.map((p) => p.propierties.onList ? setProductsInList([p.propierties.onList]) : null)
+         console.log(productsInList);
     }
 
     const saveItemContext = async (newProduct) => {
@@ -22,7 +25,6 @@ export const ShoppingifyContextProvider = ({children}) => {
         const res = await enterProductRequest(newProduct);
         
         if(res){
-            setProductInprocessToSave([newProduct]);
             setProducts([...products, res.data]);
         }else{
             setProductInprocessToSave(null);
@@ -30,18 +32,32 @@ export const ShoppingifyContextProvider = ({children}) => {
         
     }
 
-    const deleteItemContext = async (itemName) => {
-        await deleteOneItem(itemName);
-        setProductInprocessToSave(" ");
+    const updateList = async (newProduct) => {
+        setProductInprocessToSave([newProduct]);
     }
 
-    const updateList = async () => {
-        const res = await updateListRequest();
-        setProducts([...products, res.data]);
+    const addToListQuantityContext = async (category, name) => {
+        const res = await addToListQuantityRequest(category, name);
     }
-
+ 
     return(
-        <ShoppingifyContext.Provider value={{allProducts, setProducts, saveItemContext, deleteItemContext, updateList, products, listLayout, setListLayout, addItemLayout, setAddItemLayout, itemDetailsLayout, setItemDetailsLayout, productInprocessToSave}}>{children}</ShoppingifyContext.Provider>
+        <ShoppingifyContext.Provider 
+        value={{allProducts, 
+        setProducts, 
+        saveItemContext, 
+        updateList, 
+        addToListQuantityContext, 
+        products,
+        productsInList, 
+        listLayout, 
+        setListLayout, 
+        addItemLayout, 
+        setAddItemLayout, 
+        itemDetailsLayout, 
+        setItemDetailsLayout, 
+        productInprocessToSave}}>
+        {children}
+        </ShoppingifyContext.Provider>
     )
 }
 

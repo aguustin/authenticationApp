@@ -6,7 +6,7 @@ import ShoppingifyContext from '../../../shoppingifyContext/shoppingifyContext';
 
 const AddNewItem = () => {
 
-    const {saveItemContext} = useContext(ShoppingifyContext);
+    const { updateList } = useContext(ShoppingifyContext);
     const [addItemLayout, setAddItemLayout] = useState(true);
     const [listLayout, setListLayout] = useState(false);
     const [detailsLayout, setDetailsLayout] = useState(false);
@@ -17,7 +17,8 @@ const AddNewItem = () => {
         setListLayout(true);
     }
 
-    const saveItem = async (e) => {
+    const updateItems = async (e) => {
+
         e.preventDefault();
 
         const newProduct = {
@@ -27,16 +28,12 @@ const AddNewItem = () => {
             category: e.target.elements.category.value
         }
 
-        await saveItemContext(newProduct);
+        await updateList(newProduct);
 
         setAddItemLayout(false);
         setDetailsLayout(true);
     }
-   /* const setDetails = (e) => {
-        e.preventDefault();
-        setAddItemLayout(false);
-        setDetailsLayout(true);
-    }*/
+ 
 
     const AddNewItemLayout = () => {
         return(
@@ -44,7 +41,7 @@ const AddNewItem = () => {
                 <div className='flex'>
                     <h1>Add new item</h1>
                 </div>
-                <form className="relative" onSubmit={(e) => saveItem(e)}>
+                <form className="relative" onSubmit={(e) => updateItems(e)}>
                     <div className='form-group'> {/**ingresar nombre del nuevo producto -> nombre */}
                         <input className='form-input' type="text" name="name" placeholder='Enter name'></input>
                         <label className='form-label'>Name</label>

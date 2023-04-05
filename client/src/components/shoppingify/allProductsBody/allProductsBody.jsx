@@ -1,18 +1,21 @@
 
+import { useContext } from 'react';
 import './allProductsBody.css';
+import ShoppingifyContext from '../../../shoppingifyContext/shoppingifyContext';
 
 const AllProductsBody = (p) => {
 
-    
+    const {addToListQuantityContext} = useContext(ShoppingifyContext);
     let obtain = [];
+
     p.propierties.forEach(element => {
         obtain.push(element.name);
     });
-
-    const addToList = (e, id) => {
+   
+    const addToListQuantity = async (e, category, name) => {
+       
         e.preventDefault();
-        const itemId = id;
-        console.log(itemId);
+        await addToListQuantityContext(category, name);
     }
     
     return(
@@ -21,7 +24,7 @@ const AllProductsBody = (p) => {
                 <div>
                     <h2>{p.category}</h2>
                     <div className='flex flex-wrap'>
-                        {obtain.map((o) => <button onClick={(e) => addToList(e, o._id)}><label className='itemName'>{o}</label><label className='agregar'>+</label></button>)}
+                    {obtain.map((o) => <button onClick={(e) => addToListQuantity(e, p.category, o, p.note, p.image)}><label className='itemName'>{o}</label><label className='agregar'>+</label></button>)}
                     </div>
                 </div> 
              </div>

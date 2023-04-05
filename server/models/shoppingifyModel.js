@@ -6,13 +6,26 @@ const shoppingifySchema = new mongoose.Schema({
         type:String,
         require:true
     },
+    listName:{
+        type:String
+    },
+    date:{
+        type:Date
+    },
     propierties: [
         {
             name: String,
             price: Number,
-            quantity: Number,
+            quantity: {
+                type:Number,
+                default: 0
+            },
             note: String,
-            image: String
+            image: String,
+            onList:{
+                type: Boolean,
+                default:false
+            }
         }
     ]
 
