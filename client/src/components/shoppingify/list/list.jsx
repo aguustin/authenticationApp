@@ -1,13 +1,17 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import './list.css';
 import source from '../../imgs/source.svg';
 import lapiz from '../../imgs/lapiz.png';
 import AddNewItem from "../addNewItem/addNewItem";
+import ShoppingifyContext from "../../../shoppingifyContext/shoppingifyContext";
 
 const List = () => {
 
+    const {productsInList} = useContext(ShoppingifyContext);
     const [listLayout, setListLayout] = useState(true);
     const [addItemLayout, setAddItemLayout] = useState(false);
+
+   // console.log("list: ", productsInList);
 
     const setAddItem = () => {
         setListLayout(false);

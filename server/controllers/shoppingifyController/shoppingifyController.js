@@ -71,21 +71,16 @@ export const  addToListController = async (req, res) => {
 
     const category = req.params.category;
     
-    const response =  await shoppingify.find({category: category}, {propierties: { $elemMatch: { name: name} } });
+    //const response =  await shoppingify.find({category: category}, {propierties: { $elemMatch: { name: name} } });
 
-    const noteData = response[0].propierties[0].note;
-
-    const imageData = response[0].propierties[0].image;
-
-     const updateData = await shoppingify.updateOne(
-        { 'propierties.name': name},
-        {
-        $set: {
-            propierties: {name: name, quantity: 1, note: noteData || null, image: imageData || null,  onList: true}  
-        }
-    }); 
-
-    res.send(updateData);
+     await shoppingify.updateOne(
+        {   'propierties.name': name   },
+        {   $set: { 'propierties.$': {name: name, quantity: 1,  onList: true}  }    },
+        {   new: true   }
+    ); 
+                                            
+    //const a = await shoppingify.aggregate[ { $match : { 'propierties.onList' : true } } ]
+    res.sendStatus(200);
     
 }
 

@@ -16,7 +16,7 @@ export const ShoppingifyContextProvider = ({children}) => {
     const allProducts = async () => {
         const res = await allProductsRequest();
         setProducts(res.data);
-        //products.map((p) => p.propierties[0].onList === true ? setProductsInList(p) : null); 
+        
     }
 
     const saveItemContext = async (newProduct) => {
@@ -37,6 +37,7 @@ export const ShoppingifyContextProvider = ({children}) => {
 
     const addToListQuantityContext = async (category, name) => {
         const res = await addToListQuantityRequest(category, name);
+        setProductsInList([productsInList, res.data]);
     }
  
     return(

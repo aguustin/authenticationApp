@@ -2,15 +2,18 @@ import mongoose, { Schema } from "mongoose";
 
 const shoppingifySchema = new mongoose.Schema({
 
-    category:{
-        type:String,
-        require:true
+    monthDate:{
+        type:Date
     },
     listName:{
         type:String
     },
-    date:{
+    dayDate:{
         type:Date
+    },
+    category:{
+        type:String,
+        require:true
     },
     propierties: [
         {

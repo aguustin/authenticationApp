@@ -7,12 +7,14 @@ import './allProducts.css';
 
 const AllProducts = () => {
 
-    const {allProducts, products, productsInList} = useContext(ShoppingifyContext);
+    const {allProducts, addToListQuantityContext, products} = useContext(ShoppingifyContext);
 
     useEffect(() => {
         allProducts();
-        console.log("products in list", productsInList);
+        addToListQuantityContext();
     }, [])
+
+    console.log(products);
 
 
     return(
@@ -34,7 +36,7 @@ const AllProducts = () => {
            )} 
            </div>
             <div className='lai'>
-                <List/>
+                    <List />
             </div>
         
         </div>
